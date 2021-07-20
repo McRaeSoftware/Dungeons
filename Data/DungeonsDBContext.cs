@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dungeons.Data
 {
-    public class DungeonsDBContext
+    public class DungeonsDBContext : DbContext
     {
+
     }
 }
