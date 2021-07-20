@@ -8,6 +8,12 @@ namespace Dungeons.Data
 {
     public class DungeonsDBContext : DbContext
     {
+        public DungeonsDBContext(DbContextOptions<DungeonsDBContext> options) : base(options)
+        {
 
+        }
+
+        // This points to the Database Tablename
+        //public DbSet<User> User { get; set; }
     }
 }
