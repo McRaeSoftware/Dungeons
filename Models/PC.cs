@@ -40,10 +40,6 @@ namespace Dungeons.Models
         public string ClassName { get; set; }
 
         [Required]
-        [DisplayName("AC")]
-        public int ArmourClass { get; set; }
-
-        [Required]
         public int MaxHealth { get; set; }
 
         [Required]
