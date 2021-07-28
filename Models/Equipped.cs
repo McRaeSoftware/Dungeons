@@ -17,7 +17,7 @@ namespace Dungeons.Models
 
         [Required]
         [DisplayName("AC")]
-        public List<string> ArmourClass { get; set; }
+        public int ArmourClass { get; set; }
 
         [Required]
         public string ArmourName { get; set; }
