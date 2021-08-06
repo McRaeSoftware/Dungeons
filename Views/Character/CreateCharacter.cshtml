@@ -1,0 +1,37 @@
+﻿@model Dungeons.Models.Character
+@{
+    ViewData["Title"] = "CreateCharacter";
+}
+
+<title>Create Character</title>
+
+<!-- Container for the Form -->
+<div class="container">
+
+    <div class="page-header">
+        <br>
+        <img src="~/images/register.png" class="mx-auto d-block">
+        <h1 class="text-center mt-4 mb-4">Create Character page</h1>
+    </div>
+
+    @*This div displays any validation errors to the user*@
+    <div asp-validation-summary="All" class="row text-danger">
+
+    </div>
+
+    <!-- Form -->
+    <form class="form-group needs-validation" asp-action="CreateCharacter" method="POST" novalidate>
+
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Name"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Name" required>
+                <div class="invalid-feedback">
+                    You cannot Leave This field Empty.
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

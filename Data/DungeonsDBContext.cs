@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dungeons.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace Dungeons.Data
         }
 
         // This points to the Database Tablename
-        //public DbSet<User> User { get; set; }
+        public DbSet<Character> Character { get; set; }
     }
 }

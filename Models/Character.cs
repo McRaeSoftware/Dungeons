@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dungeons.Models
 {
-    public class PC
+    public class Character
     {
         [Key]
         public int Character_ID { get; set; }
