@@ -25,8 +25,8 @@ namespace Dungeons.Controllers
             return View(await _context.User.ToListAsync());
         }
 
-        // GET: User/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: User/DisplayUser/5
+        public async Task<IActionResult> DisplayUser(int? id)
         {
             if (id == null)
             {
@@ -49,7 +49,7 @@ namespace Dungeons.Controllers
             return View();
         }
 
-        // POST: User/Create
+        // POST: User/CreateUser
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,7 +117,7 @@ namespace Dungeons.Controllers
         }
 
         // GET: User/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteUser(int? id)
         {
             if (id == null)
             {
@@ -135,9 +135,9 @@ namespace Dungeons.Controllers
         }
 
         // POST: User/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteUser")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteUserConfirmed(int id)
         {
             var user = await _context.User.FindAsync(id);
             _context.User.Remove(user);
