@@ -4,7 +4,7 @@ for details on configuring this project to bundle and minify static web assets. 
 /* FONTS */
 @font-face {
     font-family: draconis;
-    src: url(../fonts/draconis-font/Draconis-JRw6B.ttf);
+    src: url(/fonts/draconis-font/Draconis-JRw6B.ttf);
 }
 
 /* ANIMATIONS */
