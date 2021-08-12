@@ -22,16 +22,174 @@
     <!-- Form -->
     <form class="form-group needs-validation" asp-action="CreateCharacter" method="POST" novalidate>
 
+        <!-- Character Name -->
         <div class="form-row">
             <div class="col-6 mb-3 form-group input-group">
                 <div class="input-group-prepend">
                     <label class="input-group-text" id="inputGroupPrepend" asp-for="Name"></label>
                 </div>
-                <input class="form-control" id="validationTooltip" asp-for="Name" required>
+                <input class="form-control" id="validationTooltip" asp-for="Name" required />
                 <div class="invalid-feedback">
                     You cannot Leave This field Empty.
                 </div>
             </div>
         </div>
+
+        <!-- Alignment input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Alignment"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Alignment" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Experience input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Experience"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" value="0" asp-for="Experience" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Level input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Level"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" value="1" asp-for="Level" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- RaceName input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="RaceName"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="RaceName" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- ClassName input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="ClassName"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="ClassName" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Max Health input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="MaxHealth"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="MaxHealth" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Strength input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Strength"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Strength" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Dexterity input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Dexterity"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Dexterity" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Constitution input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Constitution"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Constitution" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Intelligence input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Intelligence"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Intelligence" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Wisdom input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Wisdom"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Wisdom" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
+        <!-- Charisma input -->
+        <div class="form-row">
+            <div class="col-6 mb-3 form-group input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" id="inputGroupPrepend" asp-for="Charisma"></label>
+                </div>
+                <input class="form-control" id="validationTooltip" asp-for="Charisma" required />
+            </div>
+            <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+            </div>
+        </div>
+
     </form>
 </div>

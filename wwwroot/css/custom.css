@@ -138,3 +138,9 @@ body {
 .btn {
     border-radius: 0px;
 }
+
+/* BACKGROUND
+---------------------------------------------------- */
+body {
+    background-color: #f2f2f2;
+}
