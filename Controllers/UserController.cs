@@ -12,17 +12,17 @@ namespace Dungeons.Controllers
 {
     public class UserController : Controller
     {
-        private readonly DungeonsDBContext _context;
+        private readonly DungeonsDBContext _database;
 
         public UserController(DungeonsDBContext context)
         {
-            _context = context;
+            _database = context;
         }
 
         // GET: User
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            return View(await _database.User.ToListAsync());
         }
 
         // GET: User/DisplayUser/5
@@ -33,7 +33,7 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _database.User
                 .FirstOrDefaultAsync(m => m.User_ID == id);
             if (user == null)
             {
@@ -58,8 +58,8 @@ namespace Dungeons.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                _database.Add(user);
+                await _database.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -73,7 +73,7 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
+            var user = await _database.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -97,8 +97,8 @@ namespace Dungeons.Controllers
             {
                 try
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    _database.Update(user);
+                    await _database.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +124,7 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _database.User
                 .FirstOrDefaultAsync(m => m.User_ID == id);
             if (user == null)
             {
@@ -139,15 +139,15 @@ namespace Dungeons.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUserConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
+            var user = await _database.User.FindAsync(id);
+            _database.User.Remove(user);
+            await _database.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.User_ID == id);
+            return _database.User.Any(e => e.User_ID == id);
         }
     }
 }
