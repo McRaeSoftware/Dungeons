@@ -16,23 +16,33 @@ namespace Dungeons.Models
         public int User_ID { get; set; }
 
         [Required]
+        [RegularExpression("@^[a-fA-F0-9]+$",
+            ErrorMessage = "Code must be a string of Hexidecimals")]
         public string Code { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z ]+$",
+            ErrorMessage = "Name can only contain letters and spaces.")]
         public string Name { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z ]+$",
+            ErrorMessage = "Alignment can only contain letters and spaces.")]
         public string Alignment { get; set; }
 
         [Required]
         [DisplayName("Exp")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Experience can only contain numbers.")]
         public int Experience { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]$|(^[1][0-9]$)|(^20$)",
+            ErrorMessage = "Level can only be between 1 and 20.")]
         public int Level { get; set; }
 
         [Required]
-        [DisplayName("Race")]
+        [DisplayName("Race")] // Possibly only letters alowed on this one new races can be added
         public string RaceName { get; set; }
 
         [Required]
