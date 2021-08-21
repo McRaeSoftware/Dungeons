@@ -14,10 +14,8 @@ namespace Dungeons.Data
 
         }
 
-        // This points to the Database Tablename
-        public DbSet<Character> Character { get; set; }
-
-        // This points to the Database Tablename
+        // Database Tables
         public DbSet<Dungeons.Models.User> User { get; set; }
+        public DbSet<Character> Character { get; set; }
     }
 }
