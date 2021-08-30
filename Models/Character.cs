@@ -50,29 +50,40 @@ namespace Dungeons.Models
         public string ClassName { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int MaxHealth { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int CurrentHealth { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int Strength { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int Dexterity { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int Constitution { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int Intelligence { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int Wisdom { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$")]
         public int Charisma { get; set; }
 
+        // TODO:
+        // DISCUSS HOW WE WANT TO FORMAT
+        // seperate words with ", "?
         [Required]
         public string SavingThrows { get; set; }
 
