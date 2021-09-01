@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dungeons.Models
 {
-    public class Equipped
+    public class CharacterEquipped
     {
         [Required]
         public string CharacterCode { get; set; }
