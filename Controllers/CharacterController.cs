@@ -12,17 +12,17 @@ namespace Dungeons.Controllers
 {
     public class CharacterController : Controller
     {
-        private readonly DungeonsDBContext _context;
+        private readonly DungeonsDBContext _database;
 
         public CharacterController(DungeonsDBContext context)
         {
-            _context = context;
+            _database = context;
         }
 
         // GET: Character
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Character.ToListAsync());
+            return View(await _database.Character.ToListAsync());
         }
 
         // GET: Character/Details/5
@@ -33,7 +33,7 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character
+            var character = await _database.Character
                 .FirstOrDefaultAsync(m => m.Character_ID == id);
             if (character == null)
             {
@@ -58,8 +58,8 @@ namespace Dungeons.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(character);
-                await _context.SaveChangesAsync();
+                _database.Add(character);
+                await _database.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(character);
@@ -73,7 +73,7 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character.FindAsync(id);
+            var character = await _database.Character.FindAsync(id);
             if (character == null)
             {
                 return NotFound();
@@ -97,8 +97,8 @@ namespace Dungeons.Controllers
             {
                 try
                 {
-                    _context.Update(character);
-                    await _context.SaveChangesAsync();
+                    _database.Update(character);
+                    await _database.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +124,7 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character
+            var character = await _database.Character
                 .FirstOrDefaultAsync(m => m.Character_ID == id);
             if (character == null)
             {
@@ -139,15 +139,15 @@ namespace Dungeons.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Character.FindAsync(id);
-            _context.Character.Remove(character);
-            await _context.SaveChangesAsync();
+            var character = await _database.Character.FindAsync(id);
+            _database.Character.Remove(character);
+            await _database.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CharacterExists(int id)
         {
-            return _context.Character.Any(e => e.Character_ID == id);
+            return _database.Character.Any(e => e.Character_ID == id);
         }
     }
 }
