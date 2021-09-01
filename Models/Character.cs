@@ -10,9 +10,13 @@ namespace Dungeons.Models
     public class Character
     {
         [Key]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage ="Character ID must only contain numbers")]
         public int Character_ID { get; set; }
 
         [Required]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "User ID must only contain numbers")]
         public int User_ID { get; set; }
 
         [Required]
@@ -42,55 +46,70 @@ namespace Dungeons.Models
         public int Level { get; set; }
 
         [Required]
-        [DisplayName("Race")] // Possibly only letters alowed on this one new races can be added
+        [DisplayName("Race")]
+        [RegularExpression(@"^[a-zA-z ]$",
+            ErrorMessage ="Race must only contain letters and spaces.")]
         public string RaceName { get; set; }
 
         [Required]
         [DisplayName("Class")]
+        [RegularExpression(@"^[a-zA-z]$",
+            ErrorMessage = "Class must only contain letters.")]
         public string ClassName { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$", 
+            ErrorMessage ="MaxHealth can only contain nmumbers.")]
         public int MaxHealth { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "CurrentHealth can only contain nmumbers.")]
         public int CurrentHealth { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Strength can only contain nmumbers.")]
         public int Strength { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Dexterity can only contain nmumbers.")]
         public int Dexterity { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Constitution can only contain nmumbers.")]
         public int Constitution { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Intelligence can only contain nmumbers.")]
         public int Intelligence { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Wisdom can only contain nmumbers.")]
         public int Wisdom { get; set; }
 
         [Required]
-        [RegularExpression(@"^[0-9]+$")]
+        [RegularExpression(@"^[0-9]+$",
+            ErrorMessage = "Charisma can only contain nmumbers.")]
         public int Charisma { get; set; }
 
-        // TODO:
-        // DISCUSS HOW WE WANT TO FORMAT
-        // seperate words with ", "?
         [Required]
+        [RegularExpression(@"^[a-zA-z, ]+$",
+            ErrorMessage ="Please seperate Saving throws with ', ' e.g. 'Wisdom, Charisma'.")]
         public string SavingThrows { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-z, ]+$",
+            ErrorMessage = "Please seperate Proficiencies with ', ' e.g. 'Simple ranged weapons, Heavy Armour, Intimidation'.")]
         public string Proficiencies { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-z, ]+$",
+            ErrorMessage = "Please seperate Languages with ', ' e.g. 'Common, Dwarvish, Elvish'.")]
         public string Languages { get; set; }
 
     }
