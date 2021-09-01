@@ -17,7 +17,8 @@ namespace Dungeons.Models
         public string Username { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-_]+\.[A-Za-z]{2,}$", ErrorMessage = "Please use a valid email format")]
+        [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-_]+\.[A-Za-z]{2,}$",
+            ErrorMessage = "Please use a valid email format")]
         public string Email { get; set; }
 
         [Required]
