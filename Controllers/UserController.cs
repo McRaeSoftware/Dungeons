@@ -43,7 +43,7 @@ namespace Dungeons.Controllers
             return View(user);
         }
 
-        // GET: User/Create
+        // GET: User/CreateUser
         public IActionResult CreateUser()
         {
             return View();
@@ -65,7 +65,7 @@ namespace Dungeons.Controllers
             return View(user);
         }
 
-        // GET: User/Edit/5
+        // GET: User/EditUser/5
         public async Task<IActionResult> EditUser(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace Dungeons.Controllers
             return View(user);
         }
 
-        // POST: User/Edit/5
+        // POST: User/EditUser/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace Dungeons.Controllers
             return View(user);
         }
 
-        // GET: User/Delete/5
+        // GET: User/DeleteUser/5
         public async Task<IActionResult> DeleteUser(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace Dungeons.Controllers
             return View(user);
         }
 
-        // POST: User/Delete/5
+        // POST: User/DeleteUser/5
         [HttpPost, ActionName("DeleteUser")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUserConfirmed(int id)
