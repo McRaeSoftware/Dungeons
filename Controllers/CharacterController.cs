@@ -25,16 +25,15 @@ namespace Dungeons.Controllers
             return View(await _database.Character.ToListAsync());
         }
 
-        // GET: Character/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Character/DisplayCharacter/5
+        public async Task<IActionResult> DisplayCharacter(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var character = await _database.Character
-                .FirstOrDefaultAsync(m => m.Character_ID == id);
+            var character = await _database.Character.FirstOrDefaultAsync(m => m.Character_ID == id);
             if (character == null)
             {
                 return NotFound();
@@ -43,18 +42,18 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // GET: Character/Create
-        public IActionResult Create()
+        // GET: Character/CreateCharacter
+        public IActionResult CreateCharacter()
         {
             return View();
         }
 
-        // POST: Character/Create
+        // POST: Character/CreateCharacter
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Character_ID,User_ID,Code,Name,Alignment,Experience,Level,RaceName,ClassName,MaxHealth,CurrentHealth,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,SavingThrows,Proficiencies,Languages")] Character character)
+        public async Task<IActionResult> CreateCharacter([Bind("Character_ID,User_ID,Code,Name,Alignment,Experience,Level,RaceName,ClassName,MaxHealth,CurrentHealth,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,SavingThrows,Proficiencies,Languages")] Character character)
         {
             if (ModelState.IsValid)
             {
@@ -65,8 +64,8 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // GET: Character/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Character/EditCharacter/5
+        public async Task<IActionResult> EditCharacter(int? id)
         {
             if (id == null)
             {
@@ -81,12 +80,12 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // POST: Character/Edit/5
+        // POST: Character/EditCharacter/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Character_ID,User_ID,Code,Name,Alignment,Experience,Level,RaceName,ClassName,MaxHealth,CurrentHealth,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,SavingThrows,Proficiencies,Languages")] Character character)
+        public async Task<IActionResult> EditCharacter(int id, [Bind("Character_ID,User_ID,Code,Name,Alignment,Experience,Level,RaceName,ClassName,MaxHealth,CurrentHealth,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,SavingThrows,Proficiencies,Languages")] Character character)
         {
             if (id != character.Character_ID)
             {
@@ -116,16 +115,15 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // GET: Character/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Character/DeleteCharacter/5
+        public async Task<IActionResult> DeleteCharacter(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var character = await _database.Character
-                .FirstOrDefaultAsync(m => m.Character_ID == id);
+            var character = await _database.Character.FirstOrDefaultAsync(m => m.Character_ID == id);
             if (character == null)
             {
                 return NotFound();
@@ -134,8 +132,8 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // POST: Character/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Character/DeleteCharacter/5
+        [HttpPost, ActionName("DeleteCharacter")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
