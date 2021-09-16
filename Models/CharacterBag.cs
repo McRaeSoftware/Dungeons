@@ -13,20 +13,23 @@ namespace Dungeons.Models
         public int CharacterCode { get; set; }
 
         [Required]
+        [RegularExpressionList(@"^[a-zA-Z ']+$", ErrorMessage = "Each item in the bag must only contain letters, spaces and apostrophes")]
         public List<string> ItemList;
 
         [Required]
         [DisplayName("gp")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage ="Gold must be a number")]
         public int Gold { get; set; }
 
         [Required]
         [DisplayName("sp")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Silver must be a number")]
         public int Silver { get; set; }
 
         [Required]
         [DisplayName("cp")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Copper must be a number")]
         public int Copper { get; set; }
-
 
     }
 }
