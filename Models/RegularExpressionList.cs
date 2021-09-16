@@ -11,16 +11,16 @@ namespace Dungeons.Models
     {
         public RegularExpressionListAttribute(string pattern) : base(pattern) { }
 
-        public override bool IsValid(object value)
+        public override bool IsValid(object list)
         {
-            if(value is not IEnumerable<string>)
+            if(list is not IEnumerable<string>)
             {
                 return false;
             }
 
-            foreach (var val in value as IEnumerable<string>)
+            foreach (var item in list as IEnumerable<string>)
             {
-                if (!Regex.IsMatch(val, Pattern))
+                if (!Regex.IsMatch(item, Pattern))
                 {
                     return false;
                 }
