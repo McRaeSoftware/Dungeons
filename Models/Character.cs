@@ -81,7 +81,7 @@ namespace Dungeons.Models
         [RegularExpression(@"^[0-9]+$",
             ErrorMessage = "Constitution can only contain nmumbers.")]
         public int Constitution { get; set; }
-
+            
         [Required]
         [RegularExpression(@"^[0-9]+$",
             ErrorMessage = "Intelligence can only contain nmumbers.")]
@@ -111,6 +111,5 @@ namespace Dungeons.Models
         [RegularExpression(@"^[a-zA-z, ]+$",
             ErrorMessage = "Please seperate Languages with ', ' e.g. 'Common, Dwarvish, Elvish'.")]
         public string Languages { get; set; }
-
     }
 }
