@@ -15,9 +15,10 @@ namespace Dungeons.Data
         }
 
         // Database Tables
-        public DbSet<Dungeons.Models.User> User { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Character> Character { get; set; }
         public DbSet<CharacterBag> CharacterBag { get; set; }
         public DbSet<CharacterEquipped> CharacterEquipped { get; set; }
+
     }
 }
