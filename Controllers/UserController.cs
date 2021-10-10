@@ -12,17 +12,17 @@ namespace Dungeons.Controllers
 {
     public class UserController : Controller
     {
-        private readonly DungeonsDBContext _database;
+        public IUserDataAccess _database { get; set; }
 
-        public UserController(DungeonsDBContext context)
+        public UserController(IUserDataAccess database)
         {
-            _database = context;
+            _database = database;
         }
 
         // GET: User
         public async Task<IActionResult> Index()
         {
-            return View(await _database.User.ToListAsync());
+            return View(await _database.GetUserListAsync());
         }
 
         // GET: User/DisplayUser/5
@@ -33,8 +33,8 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var user = await _database.User
-                .FirstOrDefaultAsync(m => m.User_ID == id);
+            var user = await _database.GetUserByID((int)id);
+
             if (user == null)
             {
                 return NotFound();
@@ -55,11 +55,10 @@ namespace Dungeons.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateUser([Bind("User_ID,Username,Email,Password")] User user)
-        {
+        { 
             if (ModelState.IsValid)
             {
-                _database.Add(user);
-                await _database.SaveChangesAsync();
+                await _database.CreateUser(user);
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -73,7 +72,8 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var user = await _database.User.FindAsync(id);
+            var user = await _database.GetUserByID((int)id);
+
             if (user == null)
             {
                 return NotFound();
@@ -97,8 +97,7 @@ namespace Dungeons.Controllers
             {
                 try
                 {
-                    _database.Update(user);
-                    await _database.SaveChangesAsync();
+                    await _database.UpdateUser(user);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +123,8 @@ namespace Dungeons.Controllers
                 return NotFound();
             }
 
-            var user = await _database.User
-                .FirstOrDefaultAsync(m => m.User_ID == id);
+            var user = await _database.GetUserByID((int)id);
+
             if (user == null)
             {
                 return NotFound();
@@ -139,15 +138,24 @@ namespace Dungeons.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUserConfirmed(int id)
         {
-            var user = await _database.User.FindAsync(id);
-            _database.User.Remove(user);
-            await _database.SaveChangesAsync();
+            await _database.DeleteUser(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _database.User.Any(e => e.User_ID == id);
+            try
+            {
+                if (_database.GetUserByID(id) != null)
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            return false;
         }
     }
 }
