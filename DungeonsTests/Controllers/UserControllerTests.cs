@@ -122,18 +122,18 @@ namespace Dungeons.Controllers.Tests
         }
 
         [TestMethod]
-        public async Task DeleteUserConfirmedTest_CalledMethodOnce_Pass()
+        public async Task DeleteUserByIDConfirmedTest_CalledMethodOnce_Pass()
         {
             var database = new Mock<IUserDataAccess>();
             var existingId = 2;
 
-            database.Setup(user => user.DeleteUser(existingId)).Returns(Task.FromResult<bool>(true));
+            database.Setup(user => user.DeleteUserByID(existingId)).Returns(Task.FromResult<bool>(true));
 
             var userController = new UserController(database.Object);
 
-            await userController.DeleteUserConfirmed(existingId);
+            await userController.DeleteUserByIDConfirmed(existingId);
 
-            database.Verify(m => m.DeleteUser(existingId), Times.Once);
+            database.Verify(m => m.DeleteUserByID(existingId), Times.Once);
         }
     }
 }

@@ -10,6 +10,6 @@ namespace Dungeons.Data
         Task<User> GetUserByID(int id);
         Task<bool> CreateUser(User user);
         Task<bool> UpdateUser(User user);
-        Task<bool> DeleteUser(int id);
+        Task<bool> DeleteUserByID(int id);
     }
 }

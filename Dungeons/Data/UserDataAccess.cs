@@ -57,7 +57,7 @@ namespace Dungeons.Data
             return false;
         }
 
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUserByID(int id)
         {
             try
             {

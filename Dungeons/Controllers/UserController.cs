@@ -116,7 +116,7 @@ namespace Dungeons.Controllers
         }
 
         // GET: User/DeleteUser/5
-        public async Task<IActionResult> DeleteUser(int? id)
+        public async Task<IActionResult> DeleteUserByID(int? id)
         {
             if (id == null)
             {
@@ -134,11 +134,11 @@ namespace Dungeons.Controllers
         }
 
         // POST: User/DeleteUser/5
-        [HttpPost, ActionName("DeleteUser")]
+        [HttpPost, ActionName("DeleteUserByID")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteUserConfirmed(int id)
+        public async Task<IActionResult> DeleteUserByIDConfirmed(int id)
         {
-            await _database.DeleteUser(id);
+            await _database.DeleteUserByID(id);
             return RedirectToAction(nameof(Index));
         }
 
