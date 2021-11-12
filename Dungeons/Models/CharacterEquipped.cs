@@ -9,13 +9,15 @@ namespace Dungeons.Models
 {
     public class CharacterEquipped
     {
+        [Key]
         [Required]
         public string CharacterCode { get; set; }
 
-        [Required]
-        [RegularExpressionList(@"^[a-zA-Z ']+$",
-            ErrorMessage = "Special Items name must only contain letters, spaces and apostrophes")]
-        public List<string> SpecialItems { get; set; }
+        // NOTE FOR DAVID: Migrations don't like the use of Lists as they are not primitive types and it's a one to many relationship. Put in a seperate class to be linked with foreign key
+        //[Required]
+        //[RegularExpressionList(@"^[a-zA-Z ']+$",
+        //    ErrorMessage = "Special Items name must only contain letters, spaces and apostrophes")]
+        //public List<string> SpecialItems { get; set; }
 
         [Required]
         [DisplayName("AC")]
