@@ -57,6 +57,20 @@ namespace Dungeons.Controllers.Tests
         }
 
         [TestMethod]
+        public async Task IndexTest_GetUsersListAsync_Pass()
+        {
+            var database = new Mock<IUserDataAccess>();
+
+            database.Setup(user => user.GetUserListAsync()).Returns(Task.FromResult<List<User>>(GetTestUsers()));
+
+            var userController = new UserController(database.Object);
+
+            await userController.Index();
+
+            database.Verify(m => m.GetUserListAsync(), Times.Once);
+        }
+
+        [TestMethod]
         public void GetUserByIDTest_Pass()
         {
             var database = new Mock<IUserDataAccess>();
