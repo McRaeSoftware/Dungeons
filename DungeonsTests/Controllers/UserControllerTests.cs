@@ -135,7 +135,5 @@ namespace Dungeons.Controllers.Tests
 
             database.Verify(m => m.DeleteUser(existingId), Times.Once);
         }
-
-
     }
 }
