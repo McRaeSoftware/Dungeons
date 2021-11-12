@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dungeons", "Dungeons.csproj", "{7BE75D3E-AA87-4E3F-9B45-F8ED4F61E945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonsTests", "..\DungeonsTests1\DungeonsTests.csproj", "{BE943971-4199-4743-B985-DE4167D50526}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonsTests", "..\DungeonsTests\DungeonsTests.csproj", "{BE943971-4199-4743-B985-DE4167D50526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
