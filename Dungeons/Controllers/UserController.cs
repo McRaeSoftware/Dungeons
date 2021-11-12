@@ -65,7 +65,7 @@ namespace Dungeons.Controllers
         }
 
         // GET: User/EditUser/5
-        public async Task<IActionResult> EditUser(int? id)
+        public async Task<IActionResult> UpdateUser(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Dungeons.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditUser(int id, [Bind("User_ID,Username,Email,Password")] User user)
+        public async Task<IActionResult> UpdateUser(int id, [Bind("User_ID,Username,Email,Password")] User user)
         {
             if (id != user.User_ID)
             {

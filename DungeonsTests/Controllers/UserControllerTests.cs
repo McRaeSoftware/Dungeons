@@ -80,10 +80,24 @@ namespace Dungeons.Controllers.Tests
 
             await userController.CreateUser(newUser);
 
-            //var expected = "";
-            //var actual = "";
-
             database.Verify(m => m.CreateUser(newUser), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task UpdateUserTest_UpdatedUser()
+        {
+            var database = new Mock<IUserDataAccess>();
+
+            var existingUser = GetTestUsers()[1];
+            var existingId = existingUser.User_ID;
+
+            database.Setup(user => user.UpdateUser(existingUser)).Returns(Task.FromResult<bool>(true));
+
+            var userController = new UserController(database.Object);
+
+            await userController.UpdateUser(existingId, existingUser);
+
+            database.Verify(m => m.UpdateUser(existingUser), Times.Once);
         }
 
     }
