@@ -9,6 +9,7 @@ namespace Dungeons.Models
 {
     public class CharacterBag
     {
+        [Key]
         [Required]
         public int CharacterCode { get; set; }
 
@@ -20,7 +21,7 @@ namespace Dungeons.Models
         [Required]
         [DisplayName("gp")]
         [RegularExpression(@"^[0-9]+$",
-            ErrorMessage ="Gold must be a number")]
+            ErrorMessage = "Gold must be a number")]
         public int Gold { get; set; }
 
         [Required]
@@ -34,6 +35,5 @@ namespace Dungeons.Models
         [RegularExpression(@"^[0-9]+$",
             ErrorMessage = "Copper must be a number")]
         public int Copper { get; set; }
-
     }
 }
