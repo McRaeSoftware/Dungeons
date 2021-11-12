@@ -32,6 +32,13 @@ namespace Dungeons.Controllers.Tests
                     Username = "SecondTestSubject",
                     Email = "TestingAgain@gmail.com",
                     Password = "Super_Secure_Password_2"
+                },
+                new User
+                {
+                    User_ID = 3,
+                    Username = "ThirdTestSubject",
+                    Email = "TestingThirdTime@gmail.com",
+                    Password = "Super_Secure_Password_3"
                 }
             };
             return output;
@@ -41,25 +48,26 @@ namespace Dungeons.Controllers.Tests
         {
             var user = new User();
 
-            user.User_ID = 3;
+            user.User_ID = 4;
             user.Username = "NewTestUser";
             user.Email = "NewTestEmail@mail.com";
-            user.Password = "Super_secure_Password_3";
+            user.Password = "Super_secure_Password_4";
 
             return user;
         }
 
         [TestMethod]
-        public void GetUserByIDTest_Valid()
-        {            
+        public void GetUserByIDTest_Pass()
+        {
             var database = new Mock<IUserDataAccess>();
+            var existingId = 2;
 
-            database.Setup(user => user.GetUserByID(2)).Returns(Task.FromResult<User>(GetTestUsers()[1]));
+            database.Setup(user => user.GetUserByID(existingId)).Returns(Task.FromResult<User>(GetTestUsers()[1]));
 
             var userController = new UserController(database.Object);
 
             var expected = GetTestUsers()[1];
-            var result = (ViewResult)userController.DisplayUser(2).Result;
+            var result = (ViewResult)userController.DisplayUser(existingId).Result;
             var actual = (User)result.Model;
 
             Assert.AreEqual(expected.User_ID, actual.User_ID);
@@ -69,7 +77,7 @@ namespace Dungeons.Controllers.Tests
         }
 
         [TestMethod]
-        public async Task CreateUserTest_SavedNewUser()
+        public async Task CreateUserTest_CalledMethodOnce_Pass()
         {
             var database = new Mock<IUserDataAccess>();
             var newUser = NewTestUser();
@@ -84,12 +92,11 @@ namespace Dungeons.Controllers.Tests
         }
 
         [TestMethod]
-        public async Task UpdateUserTest_UpdatedUser()
+        public async Task UpdateUserTest_CalledMethodOnce_Pass()
         {
             var database = new Mock<IUserDataAccess>();
-
             var existingUser = GetTestUsers()[1];
-            var existingId = existingUser.User_ID;
+            var existingId = 2;
 
             database.Setup(user => user.UpdateUser(existingUser)).Returns(Task.FromResult<bool>(true));
 
@@ -99,6 +106,22 @@ namespace Dungeons.Controllers.Tests
 
             database.Verify(m => m.UpdateUser(existingUser), Times.Once);
         }
+
+        [TestMethod]
+        public async Task DeleteUserConfirmedTest_CalledMethodOnce_Pass()
+        {
+            var database = new Mock<IUserDataAccess>();
+            var existingId = 2;
+
+            database.Setup(user => user.DeleteUser(existingId)).Returns(Task.FromResult<bool>(true));
+
+            var userController = new UserController(database.Object);
+
+            await userController.DeleteUserConfirmed(existingId);
+
+            database.Verify(m => m.DeleteUser(existingId), Times.Once);
+        }
+
 
     }
 }
