@@ -23,7 +23,7 @@ namespace Dungeons.Models
 
         [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,30}$",
-            ErrorMessage = "Password must be between 8 and 30 characters and contain atleast 1 lowercase, uppercase a number and symbol")]
+            ErrorMessage = "Password must be between 8 and 30 characters and contain atleast 1 lowercase, uppercase, a number and symbol")]
         public string Password { get; set; }
     }
 }
