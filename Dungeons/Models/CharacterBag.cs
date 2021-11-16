@@ -10,8 +10,10 @@ namespace Dungeons.Models
     public class CharacterBag
     {
         [Key]
+        public int CharacterBagID { get; set; }
+
         [Required]
-        public int CharacterCode { get; set; }
+        public string CharacterCode { get; set; }
 
         [Required]
         [RegularExpressionList(@"^[a-zA-Z ']+$",

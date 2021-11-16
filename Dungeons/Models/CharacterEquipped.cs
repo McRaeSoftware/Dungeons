@@ -10,6 +10,8 @@ namespace Dungeons.Models
     public class CharacterEquipped
     {
         [Key]
+        public int CharacterEquippedID { get; set; }
+
         [Required]
         public string CharacterCode { get; set; }
 

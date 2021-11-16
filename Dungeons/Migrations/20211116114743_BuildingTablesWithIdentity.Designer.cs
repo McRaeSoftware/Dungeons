@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dungeons.Migrations
 {
     [DbContext(typeof(DungeonsDBContext))]
-    [Migration("20211112095406_AddIdentityTables")]
-    partial class AddIdentityTables
+    [Migration("20211116114743_BuildingTablesWithIdentity")]
+    partial class BuildingTablesWithIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,10 +100,14 @@ namespace Dungeons.Migrations
 
             modelBuilder.Entity("Dungeons.Models.CharacterBag", b =>
                 {
-                    b.Property<int>("CharacterCode")
+                    b.Property<int>("CharacterBagID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CharacterCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Copper")
                         .HasColumnType("int");
@@ -114,20 +118,26 @@ namespace Dungeons.Migrations
                     b.Property<int>("Silver")
                         .HasColumnType("int");
 
-                    b.HasKey("CharacterCode");
+                    b.HasKey("CharacterBagID");
 
                     b.ToTable("CharacterBag");
                 });
 
             modelBuilder.Entity("Dungeons.Models.CharacterEquipped", b =>
                 {
-                    b.Property<string>("CharacterCode")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CharacterEquippedID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ArmourClass")
                         .HasColumnType("int");
 
                     b.Property<string>("ArmourName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CharacterCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -139,7 +149,7 @@ namespace Dungeons.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CharacterCode");
+                    b.HasKey("CharacterEquippedID");
 
                     b.ToTable("CharacterEquipped");
                 });

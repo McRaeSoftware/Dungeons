@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dungeons.Migrations
 {
-    public partial class AddIdentityTables : Migration
+    public partial class BuildingTablesWithIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,25 +47,59 @@ namespace Dungeons.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Character",
+                columns: table => new
+                {
+                    Character_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User_ID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Alignment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Experience = table.Column<int>(type: "int", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    RaceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaxHealth = table.Column<int>(type: "int", nullable: false),
+                    CurrentHealth = table.Column<int>(type: "int", nullable: false),
+                    Strength = table.Column<int>(type: "int", nullable: false),
+                    Dexterity = table.Column<int>(type: "int", nullable: false),
+                    Constitution = table.Column<int>(type: "int", nullable: false),
+                    Intelligence = table.Column<int>(type: "int", nullable: false),
+                    Wisdom = table.Column<int>(type: "int", nullable: false),
+                    Charisma = table.Column<int>(type: "int", nullable: false),
+                    SavingThrows = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Proficiencies = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Languages = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Character", x => x.Character_ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CharacterBag",
                 columns: table => new
                 {
-                    CharacterCode = table.Column<int>(type: "int", nullable: false)
+                    CharacterBagID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CharacterCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gold = table.Column<int>(type: "int", nullable: false),
                     Silver = table.Column<int>(type: "int", nullable: false),
                     Copper = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CharacterBag", x => x.CharacterCode);
+                    table.PrimaryKey("PK_CharacterBag", x => x.CharacterBagID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CharacterEquipped",
                 columns: table => new
                 {
-                    CharacterCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CharacterEquippedID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CharacterCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ArmourClass = table.Column<int>(type: "int", nullable: false),
                     ArmourName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MainHand = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -73,7 +107,7 @@ namespace Dungeons.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CharacterEquipped", x => x.CharacterCode);
+                    table.PrimaryKey("PK_CharacterEquipped", x => x.CharacterEquippedID);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,6 +123,21 @@ namespace Dungeons.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SpecialItems", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    User_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.User_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -255,6 +304,9 @@ namespace Dungeons.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Character");
+
+            migrationBuilder.DropTable(
                 name: "CharacterBag");
 
             migrationBuilder.DropTable(
@@ -262,6 +314,9 @@ namespace Dungeons.Migrations
 
             migrationBuilder.DropTable(
                 name: "SpecialItems");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
