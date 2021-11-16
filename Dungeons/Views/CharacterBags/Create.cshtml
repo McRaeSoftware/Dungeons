@@ -1,0 +1,48 @@
+﻿@model Dungeons.Models.CharacterBag
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CharacterBag</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CharacterCode" class="control-label"></label>
+                <input asp-for="CharacterCode" class="form-control" />
+                <span asp-validation-for="CharacterCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gold" class="control-label"></label>
+                <input asp-for="Gold" class="form-control" />
+                <span asp-validation-for="Gold" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Silver" class="control-label"></label>
+                <input asp-for="Silver" class="form-control" />
+                <span asp-validation-for="Silver" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Copper" class="control-label"></label>
+                <input asp-for="Copper" class="form-control" />
+                <span asp-validation-for="Copper" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

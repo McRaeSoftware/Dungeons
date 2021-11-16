@@ -1,0 +1,42 @@
+﻿@model Dungeons.Models.CharacterBag
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CharacterBag</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CharacterCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CharacterCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gold)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gold)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Silver)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Silver)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Copper)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Copper)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CharacterBagID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
