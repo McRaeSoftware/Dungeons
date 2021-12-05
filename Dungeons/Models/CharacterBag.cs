@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,9 +11,7 @@ namespace Dungeons.Models
     public class CharacterBag
     {
         [Key]
-        public int CharacterBagID { get; set; }
-
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CharacterCode { get; set; }
 
         [Required]

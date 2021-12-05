@@ -12,28 +12,29 @@ namespace Dungeons.Controllers
 {
     public class CharacterController : Controller
     {
-        private readonly DungeonsDBContext _database;
+        public ICharacterDataAccess _database { get; set; }
 
-        public CharacterController(DungeonsDBContext context)
+        public CharacterController(ICharacterDataAccess database)
         {
-            _database = context;
+            _database = database;
         }
 
         // GET: Character
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int userId)
         {
-            return View(await _database.Character.ToListAsync());
+            return View(await _database.GetMyCharacterListAsync(userId));
         }
 
         // GET: Character/DisplayCharacter/5
-        public async Task<IActionResult> DisplayCharacter(int? id)
+        public async Task<IActionResult> DisplayCharacter(string code)
         {
-            if (id == null)
+            if (code == null)
             {
                 return NotFound();
             }
 
-            var character = await _database.Character.FirstOrDefaultAsync(m => m.Character_ID == id);
+            var character = await _database.GetCharacterByCode(code);
+
             if (character == null)
             {
                 return NotFound();
@@ -57,22 +58,22 @@ namespace Dungeons.Controllers
         {
             if (ModelState.IsValid)
             {
-                _database.Add(character);
-                await _database.SaveChangesAsync();
+                await _database.CreateCharacter(character);
                 return RedirectToAction(nameof(Index));
             }
             return View(character);
         }
 
         // GET: Character/EditCharacter/5
-        public async Task<IActionResult> EditCharacter(int? id)
+        public async Task<IActionResult> UpdateCharacter(string code)
         {
-            if (id == null)
+            if (code == null)
             {
                 return NotFound();
             }
 
-            var character = await _database.Character.FindAsync(id);
+            var character = await _database.GetCharacterByCode(code);
+
             if (character == null)
             {
                 return NotFound();
@@ -85,9 +86,9 @@ namespace Dungeons.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCharacter(int id, [Bind("Character_ID,User_ID,Code,Name,Alignment,Experience,Level,RaceName,ClassName,MaxHealth,CurrentHealth,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,SavingThrows,Proficiencies,Languages")] Character character)
+        public async Task<IActionResult> UpdateCharacter(string code, [Bind("Code,User_ID,Name,Alignment,Experience,Level,RaceName,ClassName,MaxHealth,CurrentHealth,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,SavingThrows,Proficiencies,Languages")] Character character)
         {
-            if (id != character.Character_ID)
+            if (code != character.Code)
             {
                 return NotFound();
             }
@@ -96,12 +97,11 @@ namespace Dungeons.Controllers
             {
                 try
                 {
-                    _database.Update(character);
-                    await _database.SaveChangesAsync();
+                    await _database.UpdateCharacter(character);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CharacterExists(character.Character_ID))
+                    if (!CharacterExists(character.Code))
                     {
                         return NotFound();
                     }
@@ -115,15 +115,111 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // GET: Character/DeleteCharacter/5
-        public async Task<IActionResult> DeleteCharacter(int? id)
+        // GET: Character/EditCharacterBag
+        public async Task<IActionResult> UpdateCharacterBag(string code)
         {
-            if (id == null)
+            if (code == null)
             {
                 return NotFound();
             }
 
-            var character = await _database.Character.FirstOrDefaultAsync(m => m.Character_ID == id);
+            var character = await _database.GetCharacterBagByCode(code);
+
+            if (character == null)
+            {
+                return NotFound();
+            }
+            return View(character);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateCharacterBag(string code, [Bind("CharacterCode,ItemList,Gold,Silver,Copper")] CharacterBag bag)
+        {
+            if (code != bag.CharacterCode)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _database.UpdateCharacterBag(bag);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CharacterBagExists(bag.CharacterCode))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(bag);
+        }
+
+        public async Task<IActionResult> UpdateCharacterEquipped(string code)
+        {
+            if (code == null)
+            {
+                return NotFound();
+            }
+
+            var character = await _database.GetCharacterEquippedByCode(code);
+
+            if (character == null)
+            {
+                return NotFound();
+            }
+            return View(character);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateCharacterEquipped(string code, [Bind("CharacterCode,SpecialItems,ArmourClass,ArmourName,MainHand,OffHand")] CharacterEquipped equipped)
+        {
+            if (code != equipped.CharacterCode)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _database.UpdateCharacterEquipped(equipped);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CharacterEquippedExists(equipped.CharacterCode))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(equipped);
+        }
+
+        // GET: Character/DeleteCharacter/5
+        public async Task<IActionResult> DeleteCharacter(string code)
+        {
+            if (code == null)
+            {
+                return NotFound();
+            }
+
+            var character = await _database.GetCharacterByCode(code);
+
             if (character == null)
             {
                 return NotFound();
@@ -132,20 +228,69 @@ namespace Dungeons.Controllers
             return View(character);
         }
 
-        // POST: Character/DeleteCharacter/5
+        // POST: Character/DeleteCharacter/
         [HttpPost, ActionName("DeleteCharacter")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteCharacterConfirmed(string code)
         {
-            var character = await _database.Character.FindAsync(id);
-            _database.Character.Remove(character);
-            await _database.SaveChangesAsync();
+            await _database.DeleteCharacter(code);
+            //await _database.DeleteCharacterBag(code);
+            //await _database.DeleteCharacterEquipped(code);
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CharacterExists(int id)
+        private bool CharacterExists(string code)
         {
-            return _database.Character.Any(e => e.Character_ID == id);
+            try
+            {
+                if (_database.GetCharacterByCode(code) != null)
+                {
+                    return true;
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+
+            return false;
+        }
+
+        private bool CharacterBagExists(string code)
+        {
+            try
+            {
+                if (_database.GetCharacterBagByCode(code) != null)
+                {
+                    return true;
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+
+            return false;
+        }
+        private bool CharacterEquippedExists(string code)
+        {
+            try
+            {
+                if (_database.GetCharacterEquippedByCode(code) != null)
+                {
+                    return true;
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+
+            return false;
         }
     }
 }

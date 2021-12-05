@@ -18,7 +18,7 @@ namespace Dungeons.Data
 
         public async Task<User> GetUserByID(int id)
         {
-            return await _database.User.FirstOrDefaultAsync(user => user.User_ID == id);
+            return await _database.User.FirstAsync(user => user.User_ID == id);
         }
 
         public async Task<bool> CreateUser(User user)

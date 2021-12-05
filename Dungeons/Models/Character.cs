@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,19 +11,15 @@ namespace Dungeons.Models
     public class Character
     {
         [Key]
-        [RegularExpression(@"^[0-9]+$",
-            ErrorMessage ="Character ID must only contain numbers")]
-        public int Character_ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [RegularExpression("@^[a-fA-F0-9]+$",
+            ErrorMessage = "Code must be a string of Hexidecimals")]
+        public string Code { get; set; }
 
         [Required]
         [RegularExpression(@"^[0-9]+$",
             ErrorMessage = "User ID must only contain numbers")]
         public int User_ID { get; set; }
-
-        [Required]
-        [RegularExpression("@^[a-fA-F0-9]+$",
-            ErrorMessage = "Code must be a string of Hexidecimals")]
-        public string Code { get; set; }
 
         [Required]
         [RegularExpression(@"^[a-zA-Z ]+$",

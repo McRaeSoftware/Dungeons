@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,16 +11,13 @@ namespace Dungeons.Models
     public class CharacterEquipped
     {
         [Key]
-        public int CharacterEquippedID { get; set; }
-
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CharacterCode { get; set; }
 
-        // NOTE FOR DAVID: Migrations don't like the use of Lists as they are not primitive types and it's a one to many relationship. Put in a seperate class to be linked with foreign key
-        //[Required]
-        //[RegularExpressionList(@"^[a-zA-Z ']+$",
-        //    ErrorMessage = "Special Items name must only contain letters, spaces and apostrophes")]
-        //public List<string> SpecialItems { get; set; }
+        [Required]
+        [RegularExpressionList(@"^[a-zA-Z ']+$",
+            ErrorMessage = "Special Items name must only contain letters, spaces and apostrophes")]
+        public List<string> SpecialItems;
 
         [Required]
         [DisplayName("AC")]

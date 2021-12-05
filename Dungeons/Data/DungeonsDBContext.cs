@@ -19,6 +19,5 @@ namespace Dungeons.Data
         public DbSet<Character> Character { get; set; }
         public DbSet<CharacterBag> CharacterBag { get; set; }
         public DbSet<CharacterEquipped> CharacterEquipped { get; set; }
-        public DbSet<SpecialItem> SpecialItems { get; set; }
     }
 }
